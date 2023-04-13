@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPaneVar" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="droubay.sfwr1qkm2droubay2.AddPartView">
+   <children>
+      <Label layoutX="69.0" layoutY="78.0" text="Add Part">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="69.0" layoutY="131.0" text="ID" />
+      <Label layoutX="67.0" layoutY="162.0" text="Name" />
+      <Label layoutX="67.0" layoutY="192.0" text="Inv" />
+      <Label layoutX="66.0" layoutY="222.0" text="Price/Cost" />
+      <Label layoutX="64.0" layoutY="252.0" text="Max" />
+      <Label fx:id="sourceLabel" ellipsisString="" layoutX="63.0" layoutY="283.0" prefHeight="17.0" prefWidth="120.0" text="Machine ID" textOverrun="CLIP" />
+      <TextField editable="false" layoutX="188.0" layoutY="127.0" promptText="Auto-Gen Disabled" />
+      <TextField fx:id="nameField" layoutX="188.0" layoutY="158.0" />
+      <TextField fx:id="invField" layoutX="188.0" layoutY="188.0" />
+      <TextField fx:id="priceField" layoutX="188.0" layoutY="218.0" />
+      <TextField fx:id="maxField" layoutX="188.0" layoutY="248.0" />
+      <TextField fx:id="sourceField" layoutX="188.0" layoutY="279.0" />
+      <RadioButton fx:id="inHouseRadio" layoutX="188.0" layoutY="78.0" mnemonicParsing="false" onAction="#onInHousePart" text="In-House" />
+      <RadioButton fx:id="outsourceRadio" layoutX="287.0" layoutY="78.0" mnemonicParsing="false" onAction="#onOutsourcedPart" text="Outsourced" />
+      <Button fx:id="onSaveBtn" layoutX="405.0" layoutY="352.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
+      <Button fx:id="onCancelPart" layoutX="455.0" layoutY="352.0" mnemonicParsing="false" onAction="#onCancelBtn" text="Cancel" />
+      <Label layoutX="377.0" layoutY="252.0" text="Min" />
+      <TextField fx:id="minField" layoutX="407.0" layoutY="248.0" prefHeight="25.0" prefWidth="105.0" />
+      <Label fx:id="nameError" layoutX="55.0" layoutY="400.0" text="" />
+      <Label fx:id="priceError" layoutX="55.0" layoutY="425.0" text="" />
+      <Label fx:id="invError" layoutX="55.0" layoutY="450.0" text="" />
+      <Label fx:id="minError" layoutX="55.0" layoutY="475.0" text="" />
+      <Label fx:id="maxError" layoutX="55.0" layoutY="500.0" text="" />
+      <Label fx:id="sourceError" layoutX="55.0" layoutY="525.0" text="" />
+      <Label fx:id="exceptionMsg" layoutX="55.0" layoutY="550.0" text="" />
+   </children>
+</AnchorPane>
