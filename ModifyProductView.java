@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ModifyProductView extends Application implements Initializable {
@@ -82,12 +83,27 @@ public class ModifyProductView extends Application implements Initializable {
     }
 
     public void onRemovePart(ActionEvent actionEvent) {
-        Part placeHolder = removePartTable.getSelectionModel().getSelectedItem();
+        Part placeHolderPart = removePartTable.getSelectionModel().getSelectedItem();
 
-        if(placeHolder == null){
+        if(placeHolderPart == null){
             return;
         }
-        localProduct.deleteAssociatedPart(placeHolder);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Remove Part");
+        alert.setHeaderText("Remove Part?");
+        alert.setContentText("Do you want to remove this part");
+        ButtonType buttonYes = new ButtonType("Yes");
+        ButtonType buttonCancel = new ButtonType("Cancel");
+        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonYes){
+            localProduct.deleteAssociatedPart(placeHolderPart);
+        } else if (result.get() == buttonCancel){
+            return;
+        } else {
+            return;
+        }
+
     }
 
     public void onSave(ActionEvent actionEvent) throws IOException {
@@ -234,14 +250,29 @@ public class ModifyProductView extends Application implements Initializable {
         ObservableList<Part> partResults = searchPartByName(queryParts);
 
         if(partResults.size() == 0){
-            int partId = Integer.parseInt(queryParts);
-            Part part = getPartById(partId);
-            if(part != null){
-                partResults.add(part);
+            try {
+                int partId = Integer.parseInt(queryParts);
+                Part part = getPartById(partId);
+                if (part != null) {
+                    partResults.add(part);
+                }
+            } catch (NumberFormatException e){
+                searchPartByName(queryParts);
             }
         }
-        addPartTable.setItems(partResults);
-        searchField.setText("");
+        if(partResults.size() == 0){
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Part Not Found");
+            alert.setHeaderText("Part Not Found");
+            alert.setContentText("Specified part could not be found");
+            alert.showAndWait();
+
+
+        } else {
+           addPartTable.setItems(partResults);
+
+        }
 
     }
 

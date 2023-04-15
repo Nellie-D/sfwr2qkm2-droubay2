@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -137,14 +138,28 @@ public class HelloController implements Initializable {
 
     }
 
-    public void onDeletePartBtn(ActionEvent actionEvent) {
+    public void onDeletePartBtn(ActionEvent actionEvent) throws IOException {
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
 
         if (selectedPart == null) {
             return;
         }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Delete Part");
+        alert.setHeaderText("Delete Part?");
+        alert.setContentText("Do you want to delete this part");
+        ButtonType buttonYes = new ButtonType("Yes");
+        ButtonType buttonCancel = new ButtonType("Cancel");
+        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonYes){
+            Inventory.deletePart(selectedPart);
+        } else if (result.get() == buttonCancel){
+            return;
+        } else {
+            return;
+        }
 
-        Inventory.deletePart(selectedPart);
 
     }
 
@@ -157,8 +172,23 @@ public class HelloController implements Initializable {
         if(!selectedProduct.getAllAssociatedParts().isEmpty()){
             productDelError.setText("Cannot delete product that has associated part");
         } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Delete Product");
+            alert.setHeaderText("Delete Product?");
+            alert.setContentText("Do you want to delete this product");
+            ButtonType buttonYes = new ButtonType("Yes");
+            ButtonType buttonCancel = new ButtonType("Cancel");
+            alert.getButtonTypes().setAll(buttonYes, buttonCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonYes){
+                Inventory.deleteProduct(selectedProduct);
+            } else if (result.get() == buttonCancel){
+                return;
+            } else {
+                return;
+            }
             productDelError.setText("");
-            Inventory.deleteProduct(selectedProduct);
+
         }
     }
 
@@ -191,15 +221,28 @@ public class HelloController implements Initializable {
         ObservableList<Part> partResults = searchPartByName(queryParts);
 
         if(partResults.size() == 0){
-            int partId = Integer.parseInt(queryParts);
-            Part part = getPartById(partId);
-            if(part != null){
-                partResults.add(part);
+            try {
+                int partId = Integer.parseInt(queryParts);
+                Part part = getPartById(partId);
+                if (part != null) {
+                    partResults.add(part);
+                }
+            } catch (NumberFormatException e){
+                searchPartByName(queryParts);
             }
         }
+        if(partResults.size() == 0){
 
-        partsTable.setItems(partResults);
-        partSearch.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Part Not Found");
+            alert.setHeaderText("Part Not Found");
+            alert.setContentText("Specified part could not be found");
+            alert.showAndWait();
+
+        } else {
+            partsTable.setItems(partResults);
+
+        }
 
     }
 
@@ -214,7 +257,7 @@ public class HelloController implements Initializable {
             }
         }
 
-    return partNames;
+        return partNames;
     }
 
     private Part getPartById(Integer partId) {
@@ -234,15 +277,26 @@ public class HelloController implements Initializable {
         ObservableList<Product> productResults = searchProductByName(queryProducts);
 
         if(productResults.size() == 0){
-            int productId = Integer.parseInt(queryProducts);
-            Product product = getProductById(productId);
-            if(product != null){
-                productResults.add(product);
+            try {
+                int productId = Integer.parseInt(queryProducts);
+                Product product = getProductById(productId);
+                if (product != null) {
+                    productResults.add(product);
+                }
+            } catch (NumberFormatException e){
+                searchProductByName(queryProducts);
             }
         }
+        if (productResults.size() == 0){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Product Not Found");
+            alert.setHeaderText("Product Not Found");
+            alert.setContentText("Specified product could not be found");
+            alert.showAndWait();
+        } else {
+            productTable.setItems(productResults);
 
-        productTable.setItems(productResults);
-        productSearch.setText("");
+        }
     }
 
     private ObservableList<Product> searchProductByName(String partialProduct) {
