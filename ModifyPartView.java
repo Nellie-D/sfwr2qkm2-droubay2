@@ -15,18 +15,24 @@ import java.io.IOException;
 import static javafx.application.Application.launch;
 
 /**
+ * A class for part modification
  * @author Danielle Droubay
  * @version 1.0
  */
 public class ModifyPartView extends Application {
+    /**
+     * An InHouse object instantiated for local transaction
+     */
 
-    // An InHouse object instantiated for local transaction
     public InHouse localInHouse;
-
-    //An Outsourced object instantiated for local transaction
+    /**
+     * An Outsourced object instantiated for local transaction
+     */
     public Outsourced localOutsourced;
+    /**
+     * Id for each part, consistent across classes
+     */
 
-    // Id for each part, consistent across classes
 
     public static int id;
 
@@ -66,6 +72,10 @@ public class ModifyPartView extends Application {
      * Radio button that indicates part is Outsourced
      */
     public RadioButton outsourceRadio;
+
+    /**
+     * Save modified part button
+     */
     public Button onSaveBtn;
     /**
      * Cancel button

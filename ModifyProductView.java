@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- *
+ * A class for product modification
  * @author Danielle Droubay
  * @version 1.0
  */

@@ -152,6 +152,15 @@ public class MainController implements Initializable {
     }
 
     /**
+     * FUTURE ENHANCEMENT
+     * <p>
+     *  A possible future enhancement would be to have an additional column or list that
+     *  visualizes how many / which Parts are associated with each Product. With the current
+     *  version of the program, a user must enter the modifyProductView window in order to
+     *  determine which parts are associated with each Product. A future enhancement that visualizes
+     *  this relationship within the main window would greatly decrease the burden of utilization
+     *  on the user.
+     * </p>
      * Initialize the application and call testDataAdd method
      * This also establishes cell factories to fill the partsTable and productTable
      * @param url pass the url to the initializer

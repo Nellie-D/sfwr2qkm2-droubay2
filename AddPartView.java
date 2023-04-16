@@ -12,13 +12,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ * A class for creating new Part objects
  * @author Danielle Droubay
  * @version 1.0
  */
 public class AddPartView extends Application {
 
 
-    // id of each part, static throughout the application
+    /**
+     *  id of each part, static throughout the application
+     */
 
     public static int id;
 
@@ -131,7 +134,9 @@ public class AddPartView extends Application {
 
     /**
      * Call if the JavaFx save button in the addPartView application is clicked
+     * <p>
      * Save the new data to build a  new Part object and add to the Inventory
+     * </p>
      * @throws Exception may throw exception from user input
      */
     public void onSave() throws Exception {
@@ -154,7 +159,7 @@ public class AddPartView extends Application {
                 name = nameField.getText();
                 if (nameField.getText().isBlank()) {
                     nameError.setText("Name cannot be blank");
-                    throw new NumberFormatException("cannot");
+                    throw new NumberFormatException("Unable to create inHouse");
                 } else {
                     nameError.setText("");
                 }

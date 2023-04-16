@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ * JavaDocs folder located in folder javaDocs-QKM2 in directory
+ * javaDocs-QKM2/droubay.sfwr1qkm2droubay2/droubay/sfwr1qkm2droubay2
+ * The main application of the Inventory Management System which builds the stage and launches the main
  * @author Danielle Droubay
  * @version 1.0
  */
@@ -31,6 +34,7 @@ public class MainApplication extends Application {
     }
 
     /**
+     *
      * Launch the application
      * @param args
      */

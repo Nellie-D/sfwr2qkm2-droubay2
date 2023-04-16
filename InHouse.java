@@ -2,6 +2,8 @@ package droubay.sfwr1qkm2droubay2;
 
 
 /**
+ *  A concrete child class of parent class Part
+ *  Includes setters and getters for machineId
  * @author Danielle Droubay
  * @version 1.0
  */

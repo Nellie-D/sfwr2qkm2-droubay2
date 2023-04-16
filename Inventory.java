@@ -9,7 +9,9 @@ import java.util.Optional;
 
 
 /**
- *
+ * A class for inventory management and searches
+ * Manages both Product and Part object types in lists which can be
+ * added to, deleted from, searched, and updated
  * @author Danielle Droubay
  * @version 1.0
  *

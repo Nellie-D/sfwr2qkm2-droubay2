@@ -1,6 +1,8 @@
 package droubay.sfwr1qkm2droubay2;
 
 /**
+ * A concrete child class of parent class Part
+ * Includes setters and getters for companyName
  * @author Danielle Droubay
  * @version 1.0
  */

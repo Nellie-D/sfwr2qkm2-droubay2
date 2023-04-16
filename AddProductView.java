@@ -14,18 +14,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
+ * A class for creating new Product objects
  * @author Danielle Droubau
  * @version 1.0
  */
 public class AddProductView extends Application implements Initializable {
 
-    // Instantiate a list of Associated Parts per Product for local use and transaction
+    /**
+     * Instantiate a list of Associated Parts per Product for local use and transaction
+      */
+
     private ObservableList<Part> localAssociatedParts = FXCollections.observableArrayList();
 
-    // Object instantiation of Product Class for local use and transaction
+    /**
+     * Object instantiation of Product Class for local use and transaction
+     */
+
+
     private Product localProduct;
 
-    // Unique id which is static throughout the application
+    /**
+     *  Unique id which is static throughout the application
+      */
+
 
     public static int id;
     /**
@@ -269,6 +280,17 @@ public class AddProductView extends Application implements Initializable {
         }
     }
     /**
+     * RUNTIME ERROR
+     * <p> While creating the onSave method, I frequently encountered
+     *     runtime errors while trying to save the data to the new product.
+     *     For example, entering non-numeric data into the inventory field
+     *     would cause the system to crash, as parsing a string with character values
+     *     into an Integer raised a NumberFormatException.
+     *     I corrected the error by adding the try / catch handlers into
+     *     the Save method. With the try / catch blocks, whenever a non-numeric value is
+     *     parsed into an Integer or Double data type, the system does not crash, but rather
+     *     redirects to the handler in the catch block.
+     * </p>
      * Call if the Save Button is clicked
      * Saves the data for this product
      * @throws IOException may throw exception from user input
@@ -424,6 +446,7 @@ public class AddProductView extends Application implements Initializable {
     }
 
     /**
+     *
      * Call if the Cancel Button is clicked
      * Closes the current window without saving the data for this product
      * @throws IOException may throw exception
@@ -436,7 +459,49 @@ public class AddProductView extends Application implements Initializable {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Call if Search Field for Parts is used
+     * Searches all parts in the inventory and returns a list of those with corresponding
+     * substrings or ids
+     */
+    public void searchPartsTable() {
+        // Create a variable to store the data to be searched for
+        String queryParts = searchField.getText();
+        // Create a list to store a list of Parts with corresponding strings or ids
+        // Call the Inventory lookupPart method with the parameter queryParts
+
+        ObservableList<Part> partResults = Inventory.lookupPart(queryParts);
+        /// If the returned list is empty, search for a matching int id
+        if (partResults.size() == 0) {
+            try {
+                // May throw IOException from integer parsing
+                int partId = Integer.parseInt(queryParts);
+                Part part = Inventory.lookupPart(partId);
+                // Add the part to the list
+                if (part != null) {
+                    partResults.add(part);
+                }
+            } catch (NumberFormatException e) {
+                // If queryParts is non-numeric, search by string
+                Inventory.lookupPart(queryParts);
+            }
+        }
+        // If no parts are found, alert the user
+        if (partResults.size() == 0) {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Part Not Found");
+            alert.setHeaderText("Part Not Found");
+            alert.setContentText("Specified part could not be found");
+            alert.showAndWait();
+
+        } else {
+            // If parts are found, update the table with the corresponding objects
+            addPartTable.setItems(partResults);
+
+        }
+
+
+    }
 }
-
-
-

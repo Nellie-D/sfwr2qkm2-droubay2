@@ -9,7 +9,8 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 /**
- *
+ * In addition to class member variables, Product also has a list of associatedParts
+ * This list can have parts added to it or removed from it
  * @author Danielle Droubay
  * @version 1.0
  */
