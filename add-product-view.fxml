@@ -45,8 +45,8 @@
             <Button fx:id="removeBtn" layoutX="632.0" layoutY="413.0" mnemonicParsing="false" onAction="#onRemovePart" text="Remove Associated Part" />
             <Button fx:id="saveBtn" layoutX="632.0" layoutY="445.0" mnemonicParsing="false" onAction="#onSave" text="Save" />
             <Button fx:id="cancelBtn" layoutX="723.0" layoutY="445.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-            <TextField fx:id="searchField" layoutX="611.0" layoutY="26.0" prefHeight="25.0" prefWidth="163.0" promptText="Search by Part ID or Name" />
-            <Label fx:id="nameError" layoutX="70.0" layoutY="305.0" text=""/>
+             <TextField fx:id="searchField" layoutX="611.0" layoutY="26.0" onAction="#searchPartsTable" prefHeight="25.0" prefWidth="163.0" promptText="Search by Part ID or Name" />
+             <Label fx:id="nameError" layoutX="70.0" layoutY="300.0" text=""/>
             <Label fx:id= "inventoryError" layoutX="70.0" layoutY="331.0" text=""/>
             <Label fx:id="priceError" layoutX="70.0" layoutY="360.0" text=""/>
             <Label fx:id="minError" layoutX="70.0" layoutY="386.0" text=""/>
