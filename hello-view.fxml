@@ -56,5 +56,6 @@
       </Pane>
       <Button layoutX="861.0" layoutY="354.0" mnemonicParsing="false" onAction="#onExitClicked" text="Exit" />
       <Label fx:id="productDelError" layoutX="502.0" layoutY="358.0" text="" />
+      <Label fx:id="deleteMsg" layoutX="27.0" layoutY="350.0" text="" />
    </children>
 </Pane>
