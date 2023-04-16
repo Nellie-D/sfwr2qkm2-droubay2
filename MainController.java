@@ -15,39 +15,99 @@ import java.util.ResourceBundle;
  * @author Danielle Droubay
  * @version 1.0
  */
-public class HelloController implements Initializable {
+public class MainController implements Initializable {
 
     /**
-     * Class members
+     * Column of part ids
      */
-
-    // JavaFX members
     public TableColumn<Object, Object> partIDColumn;
+    /**
+     * Column of part names
+     */
     public TableColumn<Object, Object> partNameColumn;
+    /**
+     * Column of part inventory
+     */
     public TableColumn<Object, Object> invLevelColumn;
+    /**
+     * Column of part prices
+     */
     public TableColumn<Object, Object> pricePerUnitColumn;
+    /**
+     * Add product button
+     */
     public Button onAddClickProdBtn;
+    /**
+     * Add part button
+     */
     public Button onAddClickBtn;
+    /**
+     * The part table
+     */
     public TableView<Part> partsTable;
+    /**
+     * Delete part button
+     */
     public Button onDeletePart;
+    /**
+     * Delete product button
+     */
     public Button onDeleteProduct;
+    /**
+     * Modify product button
+     */
     public Button onModProduct;
+    /**
+     * The product table
+     */
     public TableView<Product> productTable;
+    /**
+     * Column of product ids
+     */
     public TableColumn<Object, Object> productIDColumn;
+    /**
+     * Column of product names
+     */
     public TableColumn<Object, Object> productNameColumn;
+    /**
+     * Column of product inventory
+     */
     public TableColumn<Object, Object> invLevelColumnProduct;
+    /**
+     * Column of product price
+     */
     public TableColumn<Object, Object> priceProductColumn;
+    /**
+     * A search field for products
+     */
     public TextField productSearch;
+    /**
+     * A search field for parts
+     */
     public TextField partSearch;
+    /**
+     * Displays error message if product cannot be deleted
+     */
     public Label productDelError;
+    /**
+     * Displays a message to update deletion status
+     */
     public Label deleteMsg;
 
-    // Instantiations of addPartView and addProductView classes
+    /**
+     * Instantiation of addPartView class
+     */
     AddPartView addPartViewInst = new AddPartView();
+
+    /**
+     * Instantiation of addProductView class
+     */
     AddProductView addProductInst = new AddProductView();
 
-    // initDataAdd informs the application whether test data has been added yet
-    // This ensures that the test data is not initialized every time the main application is launched per program run
+    /**
+     * initDataAdd informs the application whether test data has been added yet
+     * This ensures that the test data is not initialized every time the main application is launched per program run
+      */
     private static boolean initDataAdd = true;
 
     /**

@@ -17,38 +17,88 @@ import java.io.IOException;
  */
 public class AddPartView extends Application {
 
-    /**
-     * Class members
-     */
 
     // id of each part, static throughout the application
 
     public static int id;
 
-    // JavaFX members
+    /**
+     * Indicates if the source is Outsourced or InHouse
+     */
     public Label sourceLabel;
+    /**
+     * Save new part button
+     */
     public Button onSaveBtn;
+    /**
+     * Radio button that indicates part is InHouse
+     */
     public RadioButton inHouseRadio;
+    /**
+     * Radio button that indicates part is Outsourced
+     */
     public RadioButton outsourceRadio;
+    /**
+     * Field to obtain the name
+     */
     public TextField nameField;
+    /**
+     * Field to obtain the inventory
+     */
     public TextField invField;
+    /**
+     * Field to obtain the price
+     */
     public TextField priceField;
+    /**
+     * Field to obtain the maximum
+     */
     public TextField maxField;
+    /**
+     * Field to obtain the minimum
+     */
     public TextField minField;
+    /**
+     * Field to obtain the source, whether machine id or company name
+     */
     public TextField sourceField;
+    /**
+     * Cancel button
+     */
     public Button onCancelPart;
+    /**
+     * Displays error resulting from name input
+     */
     public Label nameError;
+    /**
+     * Displays error resulting from price
+     */
     public Label priceError;
+    /**
+     * Displays error resulting from inventory
+     */
     public Label invError;
+    /**
+     * Displays error resulting from minimum
+     */
     public Label minError;
+    /**
+     * Displays error resulting from maximum
+     */
     public Label maxError;
+    /**
+     * Displays error message that the part could not be made
+     */
     public Label exceptionMsg;
+    /**
+     * Displays error resulting from source
+     */
     public Label sourceError;
 
     /**
-     * Built the addPartView stage
+     * Build the addPartView stage
      * @param stage the stage to build
-     * @throws IOException throw IOException
+     * @throws IOException may throw exception
      */
     @Override
     public void start(Stage stage)  throws IOException {
@@ -58,14 +108,6 @@ public class AddPartView extends Application {
         stage.setScene(scene);
         stage.show();
 
-    }
-
-    /**
-     *
-     * Launch the main for the mainPartView class
-     */
-    public static void main(String[] args) {
-        launch();
     }
 
     /**
@@ -383,7 +425,7 @@ public class AddPartView extends Application {
         }
         // Upon successful creation of object and save to Inventory, exit current window
         // Reenter the main view
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
 
         Stage stage = (Stage) onSaveBtn.getScene().getWindow();
@@ -396,7 +438,7 @@ public class AddPartView extends Application {
      */
     public void onCancelBtn() throws IOException {
         // Open the main application window
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
 
         // Close the current addPartView window without saving data

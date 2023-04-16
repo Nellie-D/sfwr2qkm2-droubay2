@@ -20,12 +20,9 @@ import static javafx.application.Application.launch;
  */
 public class ModifyPartView extends Application {
 
-    /**
-     * Class members
-     */
-
     // An InHouse object instantiated for local transaction
     public InHouse localInHouse;
+
     //An Outsourced object instantiated for local transaction
     public Outsourced localOutsourced;
 
@@ -33,24 +30,74 @@ public class ModifyPartView extends Application {
 
     public static int id;
 
-    //JavaFX members
+    /**
+     * Indicates if the source is Outsourced or InHouse
+     */
     public Label sourceLabel;
+    /**
+     * Field to obtain the name
+     */
     public TextField nameField;
+    /**
+     * Field to obtain the inventory
+     */
     public TextField invField;
+    /**
+     * Field to obtain the price
+     */
     public TextField priceField;
+    /**
+     * Field to obtain the maximum
+     */
     public TextField maxField;
+    /**
+     * Field to obtain the minimum
+     */
+    public TextField minField;
+    /**
+     * Field to obtain the source, whether machine id or company name
+     */
     public TextField sourceField;
+    /**
+     * Radio button that indicates part is InHouse
+     */
     public RadioButton inHouseRadio;
+    /**
+     * Radio button that indicates part is Outsourced
+     */
     public RadioButton outsourceRadio;
     public Button onSaveBtn;
+    /**
+     * Cancel button
+     */
     public Button onCancelPart;
-    public TextField minField;
+    /**
+     * Displays error resulting from name input
+     */
     public Label nameError;
+    /**
+     * Displays error resulting from price
+     */
     public Label priceError;
+    /**
+     * Displays error resulting from inventory
+     */
     public Label invError;
+    /**
+     * Displays error resulting from minimum
+     */
     public Label minError;
+    /**
+     * Displays error resulting from maximum
+     */
     public Label maxError;
+    /**
+     * Displays error resulting from source
+     */
     public Label sourceError;
+    /**
+     * Displays error message that the part could not be modified
+     */
     public Label exceptionMsg;
 
     /**
@@ -66,14 +113,6 @@ public class ModifyPartView extends Application {
         stage.setScene(scene);
         stage.show();
 
-    }
-
-    /**
-     * Launch the main for the modifyPartView class
-     *
-     */
-    public static void main(String[] args) {
-        launch();
     }
 
     /**
@@ -329,7 +368,7 @@ public class ModifyPartView extends Application {
         // Successful part modification has been saved
         // Exit the modifyPartView window and reenter the main application window
 
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
 
         Stage stage = (Stage) onSaveBtn.getScene().getWindow();
@@ -345,7 +384,7 @@ public class ModifyPartView extends Application {
     public void onCancelBtn() throws IOException {
 
         // Open the main application window
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
 
         // Close the current modifyPartView window without saving data

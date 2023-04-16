@@ -3,7 +3,6 @@ package droubay.sfwr1qkm2droubay2;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -20,11 +19,6 @@ import java.util.ResourceBundle;
  */
 public class AddProductView extends Application implements Initializable {
 
-    public Label deleteMsg;
-    /**
-     * Class Members
-     */
-
     // Instantiate a list of Associated Parts per Product for local use and transaction
     private ObservableList<Part> localAssociatedParts = FXCollections.observableArrayList();
 
@@ -34,33 +28,122 @@ public class AddProductView extends Application implements Initializable {
     // Unique id which is static throughout the application
 
     public static int id;
+    /**
+     * Displays message to update deletion status
+     */
 
-    // JavaFX Members
+    public Label deleteMsg;
+
+    /**
+     * Displays error resulting from name input
+     */
     public Label nameError;
+
+    /**
+     * Displays error resulting from price
+     */
     public Label priceError;
+
+    /**
+     * Displays error resulting from inventory
+     */
     public Label inventoryError;
+
+    /**
+     * Displays error resulting from minimum
+     */
     public Label minError;
+
+    /**
+     * Displays error resulting from maximum
+     */
     public Label maxError;
+
+    /**
+     * Displays error message that the product could not be made
+     */
+
     public Label exceptionMsg;
+
+    /**
+     * Add associated part button
+     */
     public Button addBtn;
+    /**
+     * Remove associated part button
+     */
     public Button removeBtn;
+    /**
+     * Save new product button
+     */
     public Button saveBtn;
+    /**
+     * Cancel button
+     */
     public Button cancelBtn;
+    /**
+     * Field to obtain the name
+     */
     public TextField nameField;
+    /**
+     * Field to obtain the inventory
+     */
     public TextField invField;
+    /**
+     * Field to obtain the price
+     */
     public TextField priceField;
+    /**
+     * Field to obtain the maximum
+     */
     public TextField maxField;
+    /**
+     * Field to obtain the minimum
+     */
     public TextField minField;
+    /**
+     * Table of associated parts that can be added to a product
+     */
     public TableView<Part> addPartTable;
+    /**
+     * Table of associated parts that can be removed from a product
+     */
     public TableView<Part> removePartTable;
+    /**
+     * A search field for parts to be added
+     */
     public TextField searchField;
+    /**
+     * Column of part ids to be added
+     */
     public TableColumn<Object, Object> addPartIDColumn;
+    /**
+     * Column of part names to be added
+     */
     public TableColumn<Object, Object> addPartNameColumn;
+    /**
+     * Column of part inventory to be added
+     */
     public TableColumn<Object, Object> addPartInvLevelColumn;
+    /**
+     * Column of part prices to be added
+     */
     public TableColumn<Object, Object> addPartPriceColumn;
+    /**
+     * Column of part ids to be removed
+     */
     public TableColumn<Object, Object> removePartIdColumn;
+    /**
+     * Column of part names to be removed
+     */
     public TableColumn<Object, Object> removePartNameColumn;
+    /**
+     * Column of part inventory to be removed
+     */
     public TableColumn<Object, Object> removePartInvLevelColumn;
+    /**
+     * Column of part prices to be removed
+     */
     public TableColumn<Object, Object> removePartPriceColumn;
 
     /**
@@ -333,7 +416,7 @@ public class AddProductView extends Application implements Initializable {
             }
 
             // Close the current window and open the main application window
-            HelloApplication helloInst = new HelloApplication();
+            MainApplication helloInst = new MainApplication();
             helloInst.start(new Stage());
             Stage stage = (Stage) saveBtn.getScene().getWindow();
             stage.close();
@@ -347,7 +430,7 @@ public class AddProductView extends Application implements Initializable {
      */
     public void onCancel() throws IOException {
         // Open main application window
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
         // Close the current window without saving data
         Stage stage = (Stage) cancelBtn.getScene().getWindow();

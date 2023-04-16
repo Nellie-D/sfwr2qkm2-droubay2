@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author Danielle Droubay
  * @version 1.0
  */
-public class HelloApplication extends Application {
+public class MainApplication extends Application {
 
     /**
      * Launches the main panel of the application where the user can
@@ -21,7 +21,7 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 945, 400);
         stage.setTitle("Inventory Management");
         stage.setScene(scene);

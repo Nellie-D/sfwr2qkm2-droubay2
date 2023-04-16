@@ -2,7 +2,6 @@ package droubay.sfwr1qkm2droubay2;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -20,39 +19,117 @@ import java.util.ResourceBundle;
  */
 public class ModifyProductView extends Application implements Initializable {
 
-    /**
-     * Class Members
-     */
+
     // Object instantiation of Product Class for local use and transaction
     private Product localProduct;
-
-    // JavaFX Members
+    /**
+     * Displays error resulting from name input
+     */
     public Label nameError;
+    /**
+     * Displays error resulting from price
+     */
     public Label priceError;
+    /**
+     * Displays error resulting from inventory
+     */
     public Label inventoryError;
+    /**
+     * Displays error resulting from minimum
+     */
     public Label minError;
+    /**
+     * Displays error resulting from maximum
+     */
     public Label maxError;
+
+    /**
+     * Displays error message that the product could not be made
+     */
     public Label exceptionMsg;
+    /**
+     * Displays message to update deletion status
+     */
     public Label deleteMsg;
+    /**
+     * Field to obtain the name
+     */
     public TextField nameField;
+    /**
+     * Field to obtain the inventory
+     */
     public TextField invField;
+    /**
+     * Field to obtain the price
+     */
     public TextField priceField;
+    /**
+     * Field to obtain the maximum
+     */
     public TextField maxField;
+    /**
+     * Field to obtain the minimum
+     */
     public TextField minField;
+    /**
+     * Table of associated parts that can be added to a product
+     */
     public TableView<Part> addPartTable;
+    /**
+     * Table of associated parts that can be removed from a product
+     */
     public TableView<Part> removePartTable;
+    /**
+     * Add associated part button
+     */
     public Button addBtn;
+    /**
+     * Remove associated part button
+     */
     public Button removeBtn;
+    /**
+     * Save modified product button
+     */
     public Button saveBtn;
+    /**
+     * Cancel button
+     */
     public Button cancelBtn;
+    /**
+     * A search field for parts to be added
+     */
     public TextField searchField;
+    /**
+     * Column of part ids to be added
+     */
     public TableColumn<Object, Object> addPartIDColumn;
+    /**
+     * Column of part names to be added
+     */
     public TableColumn<Object, Object> addPartNameColumn;
+    /**
+     * Column of part inventory to be added
+     */
     public TableColumn<Object, Object> addPartInvLevelColumn;
+    /**
+     * Column of part prices to be added
+     */
     public TableColumn<Object, Object> addPartPriceColumn;
+    /**
+     * Column of part ids to be removed
+     */
     public TableColumn<Object, Object> removePartIdColumn;
+    /**
+     * Column of part names to be removed
+     */
     public TableColumn<Object, Object> removePartNameColumn;
+    /**
+     * Column of part inventory to be removed
+     */
     public TableColumn<Object, Object> removePartInvLevelColumn;
+    /**
+     * Column of part prices to be removed
+     */
     public TableColumn<Object, Object> removePartPriceColumn;
 
     /**
@@ -265,7 +342,7 @@ public class ModifyProductView extends Application implements Initializable {
             return;
         }
         // If no exceptions raised, save the data and return to the main application window
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
         // Close the current window
         Stage stage = (Stage) saveBtn.getScene().getWindow();
@@ -279,7 +356,7 @@ public class ModifyProductView extends Application implements Initializable {
      */
     public void onCancel() throws IOException {
         // Open main application window
-        HelloApplication helloInst = new HelloApplication();
+        MainApplication helloInst = new MainApplication();
         helloInst.start(new Stage());
         // Close the current window without saving modified data
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
