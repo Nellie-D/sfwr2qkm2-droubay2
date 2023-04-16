@@ -26,6 +26,7 @@ public class ModifyProductView extends Application implements Initializable {
     public Label minError;
     public Label maxError;
     public Label exceptionMsg;
+    public Label deleteMsg;
     private Product localProduct;
     public TextField nameField;
     public TextField invField;
@@ -88,20 +89,10 @@ public class ModifyProductView extends Application implements Initializable {
         if(placeHolderPart == null){
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Remove Part");
-        alert.setHeaderText("Remove Part?");
-        alert.setContentText("Do you want to remove this part");
-        ButtonType buttonYes = new ButtonType("Yes");
-        ButtonType buttonCancel = new ButtonType("Cancel");
-        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonYes){
-            localProduct.deleteAssociatedPart(placeHolderPart);
-        } else if (result.get() == buttonCancel){
-            return;
+        if(Product.deleteAssociatedPart(placeHolderPart)){
+            deleteMsg.setText("");
         } else {
-            return;
+            deleteMsg.setText("Part not deleted");
         }
 
     }
@@ -247,17 +238,17 @@ public class ModifyProductView extends Application implements Initializable {
     public void searchPartsTable(ActionEvent actionEvent){
         String queryParts = searchField.getText();
 
-        ObservableList<Part> partResults = searchPartByName(queryParts);
+        ObservableList<Part> partResults = Inventory.lookupPart(queryParts);
 
         if(partResults.size() == 0){
             try {
                 int partId = Integer.parseInt(queryParts);
-                Part part = getPartById(partId);
+                Part part = Inventory.lookupPart(partId);
                 if (part != null) {
                     partResults.add(part);
                 }
             } catch (NumberFormatException e){
-                searchPartByName(queryParts);
+                Inventory.lookupPart(queryParts);
             }
         }
         if(partResults.size() == 0){

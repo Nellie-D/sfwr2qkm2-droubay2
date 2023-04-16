@@ -8,9 +8,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Danielle Droubay
+ * @version 1.0
+ */
 public class HelloApplication extends Application {
 
-
+    /**
+     * Launches the main panel of the application where the user can
+     * begin to interact with the application
+     */
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -23,7 +30,10 @@ public class HelloApplication extends Application {
 
     }
 
-
+    /**
+     * Launch the application
+     * @param args
+     */
 
     public static void main(String[] args) {
             launch();

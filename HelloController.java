@@ -35,6 +35,7 @@ public class HelloController implements Initializable {
     public TextField productSearch;
     public TextField partSearch;
     public Label productDelError;
+    public Label deleteMsg;
     AddPartView addPartViewInst = new AddPartView();
     AddProductView addProductInst = new AddProductView();
 
@@ -144,20 +145,11 @@ public class HelloController implements Initializable {
         if (selectedPart == null) {
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Delete Part");
-        alert.setHeaderText("Delete Part?");
-        alert.setContentText("Do you want to delete this part");
-        ButtonType buttonYes = new ButtonType("Yes");
-        ButtonType buttonCancel = new ButtonType("Cancel");
-        alert.getButtonTypes().setAll(buttonYes, buttonCancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonYes){
-            Inventory.deletePart(selectedPart);
-        } else if (result.get() == buttonCancel){
-            return;
+
+        if(Inventory.deletePart(selectedPart)){
+            deleteMsg.setText("");
         } else {
-            return;
+            deleteMsg.setText("Part not deleted");
         }
 
 
@@ -167,28 +159,17 @@ public class HelloController implements Initializable {
         Product selectedProduct = productTable.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
+
             return;
         }
         if(!selectedProduct.getAllAssociatedParts().isEmpty()){
             productDelError.setText("Cannot delete product that has associated part");
         } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Delete Product");
-            alert.setHeaderText("Delete Product?");
-            alert.setContentText("Do you want to delete this product");
-            ButtonType buttonYes = new ButtonType("Yes");
-            ButtonType buttonCancel = new ButtonType("Cancel");
-            alert.getButtonTypes().setAll(buttonYes, buttonCancel);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonYes){
-                Inventory.deleteProduct(selectedProduct);
-            } else if (result.get() == buttonCancel){
-                return;
+            if(Inventory.deleteProduct(selectedProduct)){
+                productDelError.setText("");
             } else {
-                return;
+                productDelError.setText("Product not deleted");
             }
-            productDelError.setText("");
-
         }
     }
 
@@ -218,17 +199,17 @@ public class HelloController implements Initializable {
     public void searchPartsTable(ActionEvent actionEvent){
         String queryParts = partSearch.getText();
 
-        ObservableList<Part> partResults = searchPartByName(queryParts);
+        ObservableList<Part> partResults = Inventory.lookupPart(queryParts);
 
         if(partResults.size() == 0){
             try {
                 int partId = Integer.parseInt(queryParts);
-                Part part = getPartById(partId);
+                Part part = Inventory.lookupPart(partId);
                 if (part != null) {
                     partResults.add(part);
                 }
             } catch (NumberFormatException e){
-                searchPartByName(queryParts);
+                Inventory.lookupPart(queryParts);
             }
         }
         if(partResults.size() == 0){
@@ -246,45 +227,21 @@ public class HelloController implements Initializable {
 
     }
 
-    private ObservableList<Part> searchPartByName(String partialPart) {
-        ObservableList<Part> partNames = FXCollections.observableArrayList();
 
-        ObservableList<Part> allParts = Inventory.getAllParts();
-
-        for(Part part : allParts){
-            if(part.getName().contains(partialPart)){
-                partNames.add(part);
-            }
-        }
-
-        return partNames;
-    }
-
-    private Part getPartById(Integer partId) {
-        ObservableList<Part> allParts = Inventory.getAllParts();
-
-        for (int i = 0; i < allParts.size(); i++) {
-            Part part = allParts.get(i);
-            if (part.getId() == partId) {
-                return part;
-            }
-        }
-        return null;
-    }
     public void searchProductTable(ActionEvent actionEvent) {
         String queryProducts = productSearch.getText();
 
-        ObservableList<Product> productResults = searchProductByName(queryProducts);
+        ObservableList<Product> productResults = Inventory.lookupProduct(queryProducts);
 
         if(productResults.size() == 0){
             try {
                 int productId = Integer.parseInt(queryProducts);
-                Product product = getProductById(productId);
+                Product product = Inventory.lookupProduct(productId);
                 if (product != null) {
                     productResults.add(product);
                 }
             } catch (NumberFormatException e){
-                searchProductByName(queryProducts);
+                Inventory.lookupProduct(queryProducts);
             }
         }
         if (productResults.size() == 0){
@@ -299,30 +256,5 @@ public class HelloController implements Initializable {
         }
     }
 
-    private ObservableList<Product> searchProductByName(String partialProduct) {
-        ObservableList<Product> productNames = FXCollections.observableArrayList();
 
-        ObservableList<Product> allProducts = Inventory.getAllProducts();
-
-        for(Product product : allProducts){
-            if(product.getName().contains(partialProduct)){
-                productNames.add(product);
-
-            }
-        }
-
-        return productNames;
-    }
-
-    private Product getProductById(Integer productId){
-        ObservableList<Product> allProducts = Inventory.getAllProducts();
-
-        for(int i =0; i < allProducts.size(); i++){
-            Product product = allProducts.get(i);
-            if(product.getId() == productId){
-                return product;
-            }
-        }
-        return null;
-    }
 }
