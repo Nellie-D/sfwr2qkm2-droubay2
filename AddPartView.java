@@ -1,18 +1,12 @@
 package droubay.sfwr1qkm2droubay2;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -76,9 +70,8 @@ public class AddPartView extends Application {
 
     /**
      * Call if the Part to be modified is an InHouse object
-     * @param actionEvent actionable method onInHousePart
      */
-    public void onInHousePart(ActionEvent actionEvent) {
+    public void onInHousePart() {
         // Set the correct sourceLabel text and radio buttons
         sourceLabel.setText("Machine ID");
         outsourceRadio.setSelected(false);
@@ -86,10 +79,9 @@ public class AddPartView extends Application {
 
     /**
      * Call if the Part to be modified is an Outsourced object
-     * @param actionEvent actionable method onOutsourcedPart
      */
-    public void onOutsourcedPart(ActionEvent actionEvent) {
-        // Set the corrext sourceLabel and radio buttons
+    public void onOutsourcedPart() {
+        // Set the correct sourceLabel and radio buttons
         sourceLabel.setText("Company Name");
         inHouseRadio.setSelected(false);
 
@@ -98,10 +90,9 @@ public class AddPartView extends Application {
     /**
      * Call if the JavaFx save button in the addPartView application is clicked
      * Save the new data to build a  new Part object and add to the Inventory
-     * @param actionEvent actionable method onSave
      * @throws Exception may throw exception from user input
      */
-    public void onSave(ActionEvent actionEvent) throws Exception {
+    public void onSave() throws Exception {
         // Declare variables
         String name;
         Double price;
@@ -111,7 +102,7 @@ public class AddPartView extends Application {
         Integer machineId;
         String companyName;
         // Initialize the variables with user input
-        // If the inHous radio is active, build an InHouse object
+        // If the inHouse radio is active, build an InHouse object
         if (inHouseRadio.isSelected()) {
             exceptionMsg.setText("");
             // Start a try, as user input may lead to IOException
@@ -151,7 +142,7 @@ public class AddPartView extends Application {
                 }
                 // Try to set the machineId
                 machineId = Integer.parseInt(sourceField.getText());
-                // If an exception has been raised
+                // If an exception has been raised, handle accordingly
             } catch (NumberFormatException e) {
                 // Do not allow nameField to be blank
                 if (nameField.getText().isBlank()) {
@@ -329,7 +320,7 @@ public class AddPartView extends Application {
                         invError.setText(a.getMessage());
                     }
                 }
-                // Do not allow miniumum to be blank
+                // Do not allow minimum to be blank
                 if (minField.getText().isBlank()) {
                     minError.setText("Minimum cannot be blank");
                 } else {
@@ -401,10 +392,9 @@ public class AddPartView extends Application {
 
     /**
      * Call if the cancel button has been clicked
-     * @param actionEvent actionable method onCancelBtn
      * @throws IOException may throw exception from user input
      */
-    public void onCancelBtn(ActionEvent actionEvent) throws IOException {
+    public void onCancelBtn() throws IOException {
         // Open the main application window
         HelloApplication helloInst = new HelloApplication();
         helloInst.start(new Stage());
@@ -413,6 +403,6 @@ public class AddPartView extends Application {
         Stage stage = (Stage) onCancelPart.getScene().getWindow();
         stage.close();
     }
-    
+
 }
 

@@ -2,7 +2,6 @@ package droubay.sfwr1qkm2droubay2;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -79,9 +78,8 @@ public class ModifyPartView extends Application {
 
     /**
      * Call if the Part to be modified is an InHouse object
-     * @param actionEvent actionable method onInHousePart
      */
-    public void onInHousePart(ActionEvent actionEvent){
+    public void onInHousePart(){
 
         // Set the correct sourceLabel text and radio buttons
         sourceLabel.setText("Machine ID");
@@ -90,10 +88,9 @@ public class ModifyPartView extends Application {
 
     /**
      * Call if the Part to be modified is an Outsourced object
-     * @param actionEvent an actionable method onOutsourcedPart
      *
      */
-    public void onOutsourcedPart(ActionEvent actionEvent) {
+    public void onOutsourcedPart() {
         // Set the correct sourceLabel and radio buttons
         sourceLabel.setText("Company Name");
         inHouseRadio.setSelected(false);
@@ -102,10 +99,9 @@ public class ModifyPartView extends Application {
     /**
      * Call if the JavaFX save button in the modifyPartView application is clicked
      * Save the new data from the user to update the Inventory
-     * @param actionEvent actionable method onSave
      * @throws IOException may throw exception from user input
      */
-    public void onSave(ActionEvent actionEvent) throws IOException{
+    public void onSave() throws IOException{
         // Obtain all parts for local use and transaction
         ObservableList<Part> localAllParts = Inventory.getAllParts();
         // Start a try, as user input may lead to IOException
@@ -343,10 +339,10 @@ public class ModifyPartView extends Application {
 
     /**
      * Call if the cancel button has been clicked
-     * @param actionEvent actionable method onCancelBtn
+     * Saves the updated data for this part
      * @throws IOException may throw exception from user input
      */
-    public void onCancelBtn(ActionEvent actionEvent) throws IOException {
+    public void onCancelBtn() throws IOException {
 
         // Open the main application window
         HelloApplication helloInst = new HelloApplication();
