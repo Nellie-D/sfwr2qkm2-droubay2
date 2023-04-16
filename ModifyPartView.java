@@ -34,7 +34,7 @@ public class ModifyPartView extends Application {
 
     public static int id;
 
-    //JavaFX types
+    //JavaFX members
     public Label sourceLabel;
     public TextField nameField;
     public TextField invField;
@@ -56,8 +56,8 @@ public class ModifyPartView extends Application {
 
     /**
      * Build the modifyPartView stage
-     * @param stage stage to build
-     * @throws IOException may throw IOException
+     * @param stage the stage to build
+     * @throws IOException throw IOException
      */
     @Override
     public void start(Stage stage)  throws IOException {
@@ -79,7 +79,7 @@ public class ModifyPartView extends Application {
 
     /**
      * Call if the Part to be modified is an InHouse object
-     * @param actionEvent an actionable method onInHousePart
+     * @param actionEvent actionable method onInHousePart
      */
     public void onInHousePart(ActionEvent actionEvent){
 
@@ -89,11 +89,12 @@ public class ModifyPartView extends Application {
     }
 
     /**
-     * Call if the Part to be modfied is an Outsourced object
+     * Call if the Part to be modified is an Outsourced object
      * @param actionEvent an actionable method onOutsourcedPart
      *
      */
     public void onOutsourcedPart(ActionEvent actionEvent) {
+        // Set the correct sourceLabel and radio buttons
         sourceLabel.setText("Company Name");
         inHouseRadio.setSelected(false);
     }
@@ -157,11 +158,12 @@ public class ModifyPartView extends Application {
 
                     // Try to set the machineId
 
-                    localInHouse.setMachineId(Integer.parseInt(sourceField.getText()));
+
                     if (sourceField.getText().isBlank()) {
                         sourceError.setText("MachineId/CompanyName cannot be blank");
                         throw new NumberFormatException("Unable to modify part");
                     } else {
+                        localInHouse.setMachineId(Integer.parseInt(sourceField.getText()));
                         sourceError.setText("");
                     }
 
@@ -305,7 +307,20 @@ public class ModifyPartView extends Application {
                 sourceError.setText("MachineId/CompanyName cannot be blank");
 
             } else {
-                sourceError.setText("");
+
+
+                if(inHouseRadio.isSelected()){
+                    try {
+                        // Ensure that machineId is numeric
+                        int isInt = Integer.parseInt(sourceField.getText()) * 2;
+                        sourceError.setText("");
+                    } catch (NumberFormatException k){
+                        sourceError.setText("Machine Id must be numeric");
+                    }
+                } else if (outsourceRadio.isSelected()) {
+                    sourceError.setText("");
+                }
+
             }
 
             // Upon exceptions, communicate that the part has not been modified
