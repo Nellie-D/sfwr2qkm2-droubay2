@@ -223,10 +223,18 @@ public class AddPartView extends Application {
                 } else {
                     try {
                         // Ensure that inventory is numeric
+                        // Ensure that inventory is between minimum and maximum
                         int isInt = Integer.parseInt(invField.getText()) * 2;
-                        invError.setText("");
+                        if(Integer.parseInt(invField.getText()) > Integer.parseInt(maxField.getText())
+                                || Integer.parseInt(invField.getText()) < Integer.parseInt(minField.getText())){
+                            throw new Exception("Inventory must be a value between maximum and minimum");
+                        } else {
+                            invError.setText("");
+                        }
                     } catch (NumberFormatException g) {
                         invError.setText("Inventory must be numeric");
+                    } catch (Exception a){
+                        invError.setText(a.getMessage());
                     }
                 }
                 // Do not allow minimum to be blank
@@ -234,11 +242,15 @@ public class AddPartView extends Application {
                     minError.setText("Minimum cannot be blank");
                 } else {
                     try {
-                        // Ensure that minimum is numeric
+                        // Ensure that minimum is numeric and less than maximum
                         int isInt = Integer.parseInt(minField.getText()) * 2;
-                        minError.setText("");
+                        if (Integer.parseInt(minField.getText()) > Integer.parseInt(maxField.getText())){
+                            throw new NumberFormatException("Unable to modify part");
+                        } else {
+                            minError.setText("");
+                        }
                     } catch (NumberFormatException h) {
-                        minError.setText("Minimum must be numeric");
+                        minError.setText("Minimum must be numeric and less than maximum");
                     }
                 }
 
@@ -248,10 +260,13 @@ public class AddPartView extends Application {
                 } else {
                     try {
                         // Ensure that maximum is numeric
-                        int isInt = Integer.parseInt(maxField.getText()) * 2;
-                        maxError.setText("");
+                        if (Integer.parseInt(maxField.getText()) < Integer.parseInt(minField.getText())){
+                            throw new NumberFormatException("Unable to modify part");
+                        } else {
+                            maxError.setText("");
+                        }
                     } catch (NumberFormatException i) {
-                        maxError.setText("Maximum must be numeric");
+                        maxError.setText("Maximum must be numeric and greater than minimm");
                     }
                 }
                 // Do not allow sourceField to be blank
@@ -268,6 +283,7 @@ public class AddPartView extends Application {
                         sourceError.setText("Machine Id must be numeric");
                     }
                 }
+
 
                 // Communicate to the user that exceptions have been raised
                 // A part is unable to be created
@@ -339,7 +355,7 @@ public class AddPartView extends Application {
                             priceError.setText("");
                         } else {
                             priceError.setText("Price must be numeric and of the format 'x.xx'");
-                            throw new Exception("can't");
+                            throw new Exception("Unable to create part");
 
                         }
                     } catch (Exception f) {

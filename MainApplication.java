@@ -36,7 +36,7 @@ public class MainApplication extends Application {
     /**
      *
      * Launch the application
-     * @param args
+     * @param args method arguments
      */
 
     public static void main(String[] args) {
