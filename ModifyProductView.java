@@ -20,7 +20,10 @@ import java.util.ResourceBundle;
 public class ModifyProductView extends Application implements Initializable {
 
 
-    // Object instantiation of Product Class for local use and transaction
+    /**
+     * Object instantiation of Product Class for local use and transaction
+     */
+
     private Product localProduct;
     /**
      * Displays error resulting from name input
@@ -51,6 +54,10 @@ public class ModifyProductView extends Application implements Initializable {
      * Displays message to update deletion status
      */
     public Label deleteMsg;
+    /**
+     * Field to show the id
+     */
+    public TextField idField;
     /**
      * Field to obtain the name
      */
@@ -374,6 +381,7 @@ public class ModifyProductView extends Application implements Initializable {
         // Initialize the localProduct object with the selectedProduct passed from the main window
         localProduct = selectedProduct;
         // Initialize the fields
+        idField.setText(String.valueOf(selectedProduct.getId()));
         nameField.setText(String.valueOf(selectedProduct.getName()));
         priceField.setText(String.valueOf(selectedProduct.getPrice()));
         invField.setText(String.valueOf(selectedProduct.getStock()));

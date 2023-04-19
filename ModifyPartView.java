@@ -56,6 +56,10 @@ public class ModifyPartView extends Application {
      */
     public Label sourceLabel;
     /**
+     * Field to show the id
+     */
+    public TextField idField;
+    /**
      * Field to obtain the name
      */
     public TextField nameField;
@@ -448,6 +452,7 @@ public class ModifyPartView extends Application {
             localInHouse = (InHouse) selectedPart;
             sourceLabel.setText("Machine ID");
             inHouseRadio.setSelected(true);
+            idField.setText(String.valueOf(selectedPart.getId()));
             nameField.setText(String.valueOf(selectedPart.getName()));
             priceField.setText(String.valueOf(selectedPart.getPrice()));
             invField.setText(String.valueOf(selectedPart.getStock()));
@@ -462,6 +467,7 @@ public class ModifyPartView extends Application {
             localOutsourced = (Outsourced) selectedPart;
             sourceLabel.setText("Company Name");
             outsourceRadio.setSelected(true);
+            idField.setText(String.valueOf(selectedPart.getId()));
             nameField.setText(String.valueOf(selectedPart.getName()));
             priceField.setText(String.valueOf(selectedPart.getPrice()));
             invField.setText(String.valueOf(selectedPart.getStock()));
