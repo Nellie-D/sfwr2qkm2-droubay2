@@ -24,7 +24,7 @@
         <Label layoutX="66.0" layoutY="222.0" text="Price/Cost" />
         <Label layoutX="64.0" layoutY="252.0" text="Max" />
         <Label fx:id="sourceLabel" ellipsisString="" layoutX="63.0" layoutY="283.0" prefHeight="17.0" prefWidth="120.0" text="Machine ID" textOverrun="CLIP" />
-        <TextField editable="false" layoutX="188.0" layoutY="127.0" promptText="Auto-Gen Disabled"/>
+        <TextField fx:id="idField" editable="false" layoutX="188.0" layoutY="127.0" promptText="Auto-Gen Disabled"/>
         <TextField fx:id="nameField" layoutX="188.0" layoutY="158.0" />
         <TextField fx:id="invField" layoutX="188.0" layoutY="188.0" />
         <TextField fx:id="priceField" layoutX="188.0" layoutY="218.0" />
